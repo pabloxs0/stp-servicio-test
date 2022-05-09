@@ -8,7 +8,8 @@ const app = express();
 const morgan = require('morgan');
 
 //configuraciones
-app.set('port', process.env.PORT || 3000);
+//app.set('port', process.env.PORT || 7024);
+app.set('port', 7024);
 app.set('json spaces', 2);
 
 //middleware
@@ -20,5 +21,5 @@ app.use(express.json());
 app.use(require('./routes/index'));
 //start server
 app.listen(app.get('port'),()=> {
-   console.log(`Server on port ${3000}`);//backtick (alt+96)
+   console.log(`Server on port ${7024}`);//backtick (alt+96)
 });
