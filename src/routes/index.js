@@ -65,7 +65,7 @@ router.post('/cobranza', (req, res) => {
     // }
 
 
-    res.json({"mensaje": "confirmar"});
+    res.json({"mensaje": "confirmar.1"});
 })
 
 module.exports = router;
