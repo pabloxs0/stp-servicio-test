@@ -6,7 +6,7 @@ router.post('/cobranza', (req, res) => {
 
     var json = JSON.stringify(req.body);
     if (json == "{}") {
-        res.json({"error": "Cuerpo (json) vacío."});
+        res.json({"error": "Cuerpo vacío '"+json+"'."});
         return
     }
 
@@ -35,8 +35,7 @@ router.post('/cobranza', (req, res) => {
     postreq.write(json);
     postreq.end();
 
-    res.json({"mensaje": req.body});
-    //res.json({"mensaje": "confirmar"});
+    res.json({"mensaje": "confirmar"});
 })
 
 module.exports = router;
