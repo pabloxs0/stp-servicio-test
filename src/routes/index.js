@@ -3,13 +3,9 @@ const router = Router();
 
 router.post('/cobranza', (req, res) => {
 
-    if (req.body == null || req.body.length < 3) {
-        res.json({"error": "Cuerpo (json) vacío."});
-        return
-    }
-    var json = JSON.stringify(req.body);
 
-    if (json == null || json.length == 0) {
+    var json = JSON.stringify(req.body);
+    if (json == "{}") {
         res.json({"error": "Cuerpo (json) vacío."});
         return
     }
