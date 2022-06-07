@@ -6,6 +6,11 @@ router.post('/cobranza', (req, res) => {
     //var res : any = JSON.parse(this.toJsonString(), this.conversorFechaJson);
        var json = JSON.stringify(req.body);
 
+       if (json==null || json.length==0) {
+           res.json({"error": "Cuerpo (json) vacío."});
+           return
+       }
+
        var https = require('https');
 
        var options = {
