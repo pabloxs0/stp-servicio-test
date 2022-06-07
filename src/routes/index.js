@@ -3,46 +3,44 @@ const router = Router();
 
 router.post('/cobranza', (req, res) => {
 
-    //var res : any = JSON.parse(this.toJsonString(), this.conversorFechaJson);
-       var json = JSON.stringify(req.body);
+    if (req.body == null || req.body.length == 0) {
+        res.json({"error": "Cuerpo (json) vacío."});
+        return
+    }
 
-       if (json==null || json.length==0) {
-           res.json({"error": "Cuerpo (json) vacío."});
-           return
-       }
+    var json = JSON.stringify(req.body);
 
-       var https = require('https');
 
-       var options = {
-          hostname: 'ep-dot-facturanube.appspot.com',
-          path: '/stp/TKN_ACJP_SINUBE_2022/AAA010101AAA',
-          method: 'POST',
-          headers: {
-             'Content-Type': 'application/json',
-             'Content-Length': json.length
-          }
-       };
-       var postreq = https.request(options, function (res) {
-          //Handle the response
-          console.log("POST_RES",res.statusCode);
-          console.log("POST_RES",res.statusMessage);
-          // console.log('STATUS: ' + res.statusCode);
-          // console.log('HEADERS: ' + JSON.stringify(res.headers));
-          // res.setEncoding('utf8');
-          // res.on('data', function (chunk) {
-          //    console.log('BODY: ' + chunk);
-          // });
-       });
-       postreq.write(json);
-       postreq.end();
+    var https = require('https');
+
+    var options = {
+        hostname: 'ep-dot-facturanube.appspot.com',
+        path: '/stp/TKN_ACJP_SINUBE_2022/AAA010101AAA',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': json.length
+        }
+    };
+    var postreq = https.request(options, function (res) {
+        //Handle the response
+        console.log("POST_RES", res.statusCode);
+        console.log("POST_RES", res.statusMessage);
+        // console.log('STATUS: ' + res.statusCode);
+        // console.log('HEADERS: ' + JSON.stringify(res.headers));
+        // res.setEncoding('utf8');
+        // res.on('data', function (chunk) {
+        //    console.log('BODY: ' + chunk);
+        // });
+    });
+    postreq.write(json);
+    postreq.end();
 
 
     res.json({"mensaje": json});
 })
 
 module.exports = router;
-
-
 
 
 // {
