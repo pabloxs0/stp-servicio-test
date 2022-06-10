@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 
-router.post('/cobranza', (req, res) => {
+router.post('/cambioestado', (req, res) => {
 
 
     var json = JSON.stringify(req.body);
@@ -14,7 +14,7 @@ router.post('/cobranza', (req, res) => {
 
     var options = {
         hostname: 'ep-dot-facturanube.appspot.com',
-        path: '/stp/TKN_ACJP_SINUBE_2022/AAA010101AAA',
+        path: '/stp/cambioestado/TKN_ACJP_SINUBE_2022/AAA010101AAA',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ router.post('/cobranza', (req, res) => {
     postreq.write(json);
     postreq.end();
 
-    res.json({"mensaje": "confirmar"});
+    res.json({"mensaje": "recibido"});
 })
 
 module.exports = router;
