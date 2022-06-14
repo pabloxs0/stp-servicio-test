@@ -29,6 +29,7 @@ app.use(express.json());
 //routes
 app.use(require('./routes/cobranza'));
 app.use(require('./routes/cambio_estado'));
+app.use(require('./routes/pruebas'));
 //start server
 app.listen(app.get('port'),()=> {
    console.log(`Server on port ${7024}`);//backtick (alt+96)

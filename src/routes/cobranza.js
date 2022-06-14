@@ -6,7 +6,7 @@ router.post('/cobranza', (req, res) => {
 
     var json = JSON.stringify(req.body);
     if (json == "{}") {
-        res.json({"error": "Cuerpo vacío '"+json+"'."});
+        res.json({"error": "Cuerpo vacío '" + json + "'."});
         return
     }
 
