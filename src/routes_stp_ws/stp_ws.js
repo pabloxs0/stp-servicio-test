@@ -53,16 +53,16 @@ async function consume_ws(req, res, path) {
 
         let p = new Promise((resolve, reject) => {
             const req = https.request(options, (res) => {
-                // res.setEncoding('utf8');
-                // let responseBody = '';
-                //
-                // res.on('data', (chunk) => {
-                //     responseBody += chunk;
-                // });
-                //
-                // res.on('end', () => {
-                //     resolve(JSON.parse(responseBody));
-                // });
+                res.setEncoding('utf8');
+                let responseBody = '';
+
+                res.on('data', (chunk) => {
+                    responseBody += chunk;
+                });
+
+                res.on('end', () => {
+                    resolve(JSON.parse(responseBody));
+                });
                 console.log("POST_RES", res.statusCode);
                 console.log("POST_RES", res.statusMessage);
             });
