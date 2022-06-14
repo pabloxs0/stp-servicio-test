@@ -2,7 +2,8 @@ const {Router} = require('express');
 const router = Router();
 
 router.get('/prueba', (req, res) => {
-    var firma_ = getSign('CADENA_ORIGINAL','src/recursos/sinube_test_ca.pem', 'prueba#500' );
+    var cadenaOrig = "||FINE_FLOOR|R|||";
+    var firma_ = getSign(cadenaOrig,'src/recursos/sinube_test_ca.pem', 'prueba#500' );
     res.json({"firma": firma_});
 })
 
