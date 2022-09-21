@@ -1,22 +1,35 @@
 const {Router} = require('express');
 const router = Router();
+const crypto = require('crypto');
+const fs = require('fs');
 
 router.get('/prueba', (req, res) => {
     var cadenaOrig = "||FINE_FLOOR|R|||";
-    var firma_ = getSign(cadenaOrig,'src/recursos/sinube_test_ca.pem', 'prueba#500' );
+    var firma_ = getSign(cadenaOrig,'src/recursos/KEY_STORE_TEST.jks', 'prueba#500' );
+    console.log("FIRMA", firma_);
     res.json({"firma": firma_});
 })
 
 function getSign(cadenaOriginal, path, pwd) {
-    const crypto = require('crypto');
-    const fs = require('fs');
     var sign = crypto.createSign('RSA-SHA256');
-    sign.update(cadenaOriginal);
+    sign.update(cadenaOriginal,"utf8");
     sign.end();
     const key = fs.readFileSync(path);
-    let signature_b64 = sign.sign({ key, passphrase: pwd}, 'base64');
+    let signature_b64 = sign.sign(key, 'base64');
     return signature_b64;
 }
+
+// function getSign() {
+//     const sign = crypto.createSign('SHA256');
+//     sign.write('some data to sign');
+//     sign.end();
+//     const signature = sign.sign(privateKey, 'hex');
+//
+//     const verify = crypto.createVerify('SHA256');
+//     verify.write('some data to sign');
+//     verify.end();
+//     console.log(verify.verify(publicKey, signature, 'hex'));
+// }
 
 module.exports = router;
 
