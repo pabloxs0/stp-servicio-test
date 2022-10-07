@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 
+const PRUEBAS = false;
 
 router.post('/cobranza', (req, res) => {
 
@@ -13,9 +14,14 @@ router.post('/cobranza', (req, res) => {
 
     var https = require('https');
 
+    var url_ = 'ep-dot-si-nube.appspot.com'
+    if (PRUEBAS) {
+        url_ = 'ep-dot-facturanube.appspot.com';
+    }
+
     var options = {
-        hostname: 'ep-dot-facturanube.appspot.com',
-        path: '/stp/cobranza/TKN_ACJP_SINUBE_2022/AAA010101AAA',
+        hostname: url_,
+        path: '/stp/cobranza/TKN_ACJP_SINUBE_2022',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -23,15 +29,8 @@ router.post('/cobranza', (req, res) => {
         }
     };
     var postreq = https.request(options, function (res) {
-        //Handle the response
         console.log("POST_RES", res.statusCode);
         console.log("POST_RES", res.statusMessage);
-        // console.log('STATUS: ' + res.statusCode);
-        // console.log('HEADERS: ' + JSON.stringify(res.headers));
-        // res.setEncoding('utf8');
-        // res.on('data', function (chunk) {
-        //    console.log('BODY: ' + chunk);
-        // });
     });
     postreq.write(json);
     postreq.end();

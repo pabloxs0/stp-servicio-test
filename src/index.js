@@ -17,6 +17,8 @@
 *
 * sudo ufw allow 'NGINX Full' AGREGAMOS PUERTOS AL FW
 *
+* sudo ufw allow 7025 >>>> AGREGAMOS EL PUERTO QUE VAMOS A USAR!!!!
+*
 * curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 * sudo apt install nodejs
 *
@@ -39,7 +41,8 @@
 *
 * pm2 start index.js
 *
-*
+*CREO UNA VM DE WINDOWS PARA CHECAR, PRIMERO POR IP LA PAGINA INICAL DE NGINX
+* Y DESPUÉS CON POSTMAN COMUNICAR CON EL SERVICIO.
 *
 * OBTENER DE GIT:
 * sudo git pull
