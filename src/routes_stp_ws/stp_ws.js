@@ -5,10 +5,7 @@ const router = Router();
 
 
 var log4js = require("log4js");
-log4js.configure({
-    appenders: { cheese: { type: "file", filename: "cheese.log" } },
-    categories: { default: { appenders: ["cheese"], level: "error" } },
-});
+var logger = log4js.getLogger();
 
 
 router.post('/ws_test', (req, res) => {
@@ -45,8 +42,7 @@ async function consume_ws(req, res, path) {
     try {
         console.log("JSON_PRE_VACIO", req.body);
         ie = 1;
-        logger.level = "debug";
-        logger.debug("Some debug messages");
+        logger.error("Some debug messages");
         ie = 2;
         var json = JSON.stringify(req.body);
         if (json == "{}") {
