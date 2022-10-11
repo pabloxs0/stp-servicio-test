@@ -62,6 +62,7 @@ async function consume_ws(req, res, path) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(json)
             }
         };
         ie = 4;
@@ -93,7 +94,7 @@ async function consume_ws(req, res, path) {
             req_prom.end();
             ie = 12;
         });
-        //let res = await p;
+
         ie = 13;
         res.json({"mensaje": await p});
 
@@ -104,6 +105,8 @@ async function consume_ws(req, res, path) {
         //var err_t = "ERR" + ie;
         res.json({'Err': error_c});
 
+    } finally {
+        res.json({'FNLY': error_c});
     }
 
 
