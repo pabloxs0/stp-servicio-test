@@ -41,11 +41,6 @@ module.exports = router;
 async function consume_ws(req, res, path) {
     var ie = 0;
     try {
-        console.log("DESP---------------");
-        console.log(req.body);
-        //console.log(`Server on port ${7025}`);//backtick (alt+96)
-        ie = 1;
-        var cuerpo = req.body;
         ie = 1000;
         var json = JSON.stringify(req.body);
         ie = 19;
@@ -67,7 +62,6 @@ async function consume_ws(req, res, path) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(json)
             }
         };
         ie = 4;
@@ -87,9 +81,10 @@ async function consume_ws(req, res, path) {
                 });
             });
             req_prom.on('error', (err) => {
-                ie = err;
+                //ie = err;
+                res.json({"error_fatal": err.message});
                 reject(err);
-                //res.json({"error_fatal": err.message});
+
                 // return;
             });
             ie = 10;
@@ -105,7 +100,7 @@ async function consume_ws(req, res, path) {
     } catch (e) {
         console.log(e);
         var error_c = "";
-        error_c = e.mensaje + "("+ie+")";
+        error_c = e + "("+ie+")";
         //var err_t = "ERR" + ie;
         res.json({'Err': error_c});
 
