@@ -50,7 +50,7 @@ async function consume_ws(req, res, path) {
             return
         }
         ie = 3;
-        log("JSON_NO_VACIO", json);
+        //log("JSON_NO_VACIO", json);
 
         var https = require('https');
         ie = 4;
