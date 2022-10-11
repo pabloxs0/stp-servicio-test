@@ -59,7 +59,7 @@ async function consume_ws(req, res, path) {
         //var json = "dd";
 
         var http = require('http');//, PORT = 7002;
-        ie = Buffer.byteLength(json);
+        ie = 3;
         const options = {
             hostname: 'prod.stpmex.com',
             port: 7002,
@@ -70,26 +70,36 @@ async function consume_ws(req, res, path) {
                 'Content-Length': Buffer.byteLength(json)
             }
         };
+        ie = 4;
         let p = new Promise((resolve, reject) => {
             const req_prom = http.request(options, (res) => {
                 res.setEncoding('utf8');
+                ie = 5;
                 let responseBody = '';
+                ie = 6;
                 res.on('data', (chunk) => {
+                    ie = 7;
                     responseBody += chunk;
                 });
                 res.on('end', () => {
+                    ie = 8;
                     resolve(JSON.parse(responseBody));
                 });
             });
             req_prom.on('error', (err) => {
+                ie = 9;
                 reject(err);
                 //res.json({"error_fatal": err.message});
                 // return;
             });
+            ie = 10;
             req_prom.write(json)
+            ie = 11;
             req_prom.end();
+            ie = 12;
         });
         //let res = await p;
+        ie = 13;
         res.json({"mensaje": await p});
 
     } catch (e) {
