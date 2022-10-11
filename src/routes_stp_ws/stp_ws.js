@@ -38,46 +38,46 @@ module.exports = router;
 
 async function consume_ws(req, res, path) {
     var ie = 0;
-        var json = JSON.stringify(req.body);
-        if (json == "{}") {
-            res.json({"error": "Cuerpo vacío '" + json + "'."});
-            return
+
+    var json = JSON.stringify(req.body);
+    if (json == "{}") {
+        res.json({"error": "Cuerpo vacío '" + json + "'."});
+        return
+    }
+
+    var http = require('http');//, PORT = 7002;
+    ie = 4;
+    var options = {
+        hostname: 'prod.stpmex.com',
+        port: 7002,
+        path: path,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': json.length
         }
-
-        var http = require('http');//, PORT = 7002;
-        ie = 4;
-        var options = {
-            hostname: 'prod.stpmex.com',
-            port: 7002,
-            path: path,
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': json.length
-            }
-        };
-        let p = new Promise((resolve, reject) => {
-            const req = http.request(options, (res) => {
-                res.setEncoding('utf8');
-                let responseBody = '';
-                res.on('data', (chunk) => {
-                    responseBody += chunk;
-                });
-                res.on('end', () => {
-                    resolve(JSON.parse(responseBody));
-                });
+    };
+    let p = new Promise((resolve, reject) => {
+        const req = http.request(options, (res) => {
+            res.setEncoding('utf8');
+            let responseBody = '';
+            res.on('data', (chunk) => {
+                responseBody += chunk;
             });
-            req.on('error', (err) => {
-                 reject(err);
-                //res.json({"error_fatal": err.message});
-               // return;
+            res.on('end', () => {
+                resolve(JSON.parse(responseBody));
             });
-            req.write(json)
-            req.end();
         });
-        //let res = await p;
-        res.json({"mensaje": await p});
-
+        req.on('error', (err) => {
+            reject(err);
+            //res.json({"error_fatal": err.message});
+            // return;
+        });
+        req.write(json)
+        req.end();
+    });
+    //let res = await p;
+    res.json({"mensaje": await p});
 
 
     //   res.json({"mensaje": postreq.body});
