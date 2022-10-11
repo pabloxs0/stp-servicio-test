@@ -36,7 +36,57 @@ module.exports = router;
 //     log_stdout.write(util.format(d) + '\n');
 // };
 
-async function consume_ws(req, res, path) {
+async function consume_ws(req_, res_, path) {
+    var ie = 0;
+
+    var json = JSON.stringify(req.body);
+    if (json == "{}") {
+        res_.json({"error": "Cuerpo vacío '" + json + "'."});
+        return
+    }
+
+    var http = require('http');//, PORT = 7002;
+
+    const options = {
+        hostname: 'prod.stpmex.com',
+        port: 7002,
+        path: path,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(json)
+        }
+    };
+
+
+    const req = http.request(options, (res) => {
+        console.log(`STATUS: ${res.statusCode}`);
+        console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+        res.setEncoding('utf8');
+        res.on('data', (chunk) => {
+            console.log(`BODY: ${chunk}`);
+        });
+        res.on('end', () => {
+            console.log('No more data in response.');
+        });
+    });
+
+    req.on('error', (e) => {
+        console.error(`problem with request: ${e.message}`);
+    });
+
+// Write data to request body
+    req.write(json);
+    req.end();
+
+    //res_.json({"mensaje": await p});
+
+
+    //   res.json({"mensaje": postreq.body});
+}
+
+
+async function consume_ws_ant(req, res, path) {
     var ie = 0;
 
     var json = JSON.stringify(req.body);
