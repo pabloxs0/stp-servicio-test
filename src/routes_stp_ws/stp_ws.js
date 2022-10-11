@@ -52,12 +52,13 @@ async function consume_ws(req, res, path) {
         ie = 3;
         //log("JSON_NO_VACIO", json);
 
-        var https = require('https'), PORT = 7002;
+        var https = require('https');//, PORT = 7002;
         ie = 4;
         var options = {
             hostname: 'prod.stpmex.com',
             path: path,
             method: 'POST',
+            port: '7002',
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': json.length
