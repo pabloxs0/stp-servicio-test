@@ -38,7 +38,6 @@ module.exports = router;
 
 async function consume_ws(req, res, path) {
     var ie = 0;
-    try {
         var json = JSON.stringify(req.body);
         if (json == "{}") {
             res.json({"error": "Cuerpo vacío '" + json + "'."});
@@ -57,7 +56,7 @@ async function consume_ws(req, res, path) {
                 'Content-Length': json.length
             }
         };
-         let p = new Promise((resolve, reject) => {
+        let p = new Promise((resolve, reject) => {
             const req = https.request(options, (res) => {
                 res.setEncoding('utf8');
                 let responseBody = '';
@@ -69,18 +68,16 @@ async function consume_ws(req, res, path) {
                 });
             });
             req.on('error', (err) => {
-               // reject(err);
+                // reject(err);
                 res.json({"error_fatal": err.message});
                 return;
             });
             req.write(json)
             req.end();
         });
-         let res = await p;
-      res.json({"mensaje": res});
-    } catch (e) {
-        res.json({"error": e + "["+ie+"]"});
-    }
+        //let res = await p;
+        res.json({"mensaje": await p});
+
 
 
     //   res.json({"mensaje": postreq.body});
