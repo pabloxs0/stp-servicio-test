@@ -71,6 +71,7 @@ async function consume_ws(req, res, path) {
             req.on('error', (err) => {
                // reject(err);
                 res.json({"error_fatal": err.message});
+                return;
             });
             req.write(json)
             req.end();
