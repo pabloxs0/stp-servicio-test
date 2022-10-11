@@ -82,7 +82,7 @@ async function consume_ws(req, res, path) {
             });
             req_prom.on('error', (err) => {
                 //ie = err;
-                res.json({"error_fatal": err.message});
+                res.json({"error_fatal": err.message + "["+err.code+"]"});
                 reject(err);
 
                 // return;
