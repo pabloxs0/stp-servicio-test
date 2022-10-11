@@ -82,7 +82,8 @@ async function consume_ws(req, res, path) {
             });
             ie = 9;
             req.on('error', (err) => {
-                reject(err);
+               // reject(err);
+                res.json({"error_fatal": err.message});
             });
             ie = 10;
             req.write(json)
