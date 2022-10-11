@@ -7,7 +7,6 @@ const router = Router();
 var log4js = require("log4js");
 var logger = log4js.getLogger();
 
-
 router.post('/ws_test', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     res.json({"mensaje": "prueba exitosa"});
@@ -42,7 +41,8 @@ async function consume_ws(req, res, path) {
     try {
         console.log("JSON_PRE_VACIO", req.body);
         ie = 1;
-        logger.error("Some debug messages");
+        logger.level = "debug";
+        logger.debug("Some debug messages");
         ie = 2;
         var json = JSON.stringify(req.body);
         if (json == "{}") {
@@ -50,7 +50,7 @@ async function consume_ws(req, res, path) {
             return
         }
         ie = 3;
-        //log("JSON_NO_VACIO", json);
+        log("JSON_NO_VACIO", json);
 
         var https = require('https');
         ie = 4;
