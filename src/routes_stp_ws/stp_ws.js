@@ -32,31 +32,31 @@ module.exports = router;
 //     log_stdout.write(util.format(d) + '\n');
 // };
 
-async function consume_ws(req_, res_, path) {
+async function consume_ws(req, res, path) {
     var ie = 0;
+    try {
 
+        var json = JSON.stringify(req.body);
+        // if (json == "{}") {
+        //     res_.json({"error": "Cuerpo vacío '" + json + "'."});
+        //     return
+        // }
 
-    var json = JSON.stringify(req_.body);
-    // if (json == "{}") {
-    //     res_.json({"error": "Cuerpo vacío '" + json + "'."});
-    //     return
-    // }
+        //var json = "dd";
 
-    //var json = "dd";
+        // var http = require('http');//, PORT = 7002;
 
-   // var http = require('http');//, PORT = 7002;
-
-    const options = {
-        hostname: 'prod.stpmex.com',
-        port: 7002,
-        path: path,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(json)
-        }
-    };
-    res_.json({"mensaje": "FIN2"});
+        const options = {
+            hostname: 'prod.stpmex.com',
+            port: 7002,
+            path: path,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(json)
+            }
+        };
+        res.json({"mensaje": "FIN2"});
 
 //     const req = http.request(options, (res) => {
 //         console.log(`STATUS: ${res.statusCode}`);
@@ -79,8 +79,11 @@ async function consume_ws(req_, res_, path) {
 //     req.write(json);
 //     req.end();
 
-    //res_.json({"mensaje": await p});
+        //res_.json({"mensaje": await p});
 
+    } catch (e) {
+        res.json({"error": e});
+    }
 
 
 }
