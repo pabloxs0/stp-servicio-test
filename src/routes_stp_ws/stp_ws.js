@@ -57,7 +57,7 @@ async function consume_ws(req_, res_, path) {
             'Content-Length': Buffer.byteLength(json)
         }
     };
-
+    res.json({"mensaje": "FIN"});
 
     const req = http.request(options, (res) => {
         console.log(`STATUS: ${res.statusCode}`);
@@ -83,7 +83,7 @@ async function consume_ws(req_, res_, path) {
     //res_.json({"mensaje": await p});
 
 
-    res.json({"mensaje": "FIN"});
+
 }
 
 
