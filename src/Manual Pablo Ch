@@ -51,4 +51,7 @@ CREO UNA VM DE WINDOWS PARA CHECAR, PRIMERO POR IP LA PAGINA INICAL DE NGINX
  RESETEAR SERVICIO:
 pm2 restart index
 
+//Files woud be overwritten by merge:
+git reset --hard
+
 

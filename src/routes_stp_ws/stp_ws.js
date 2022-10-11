@@ -29,7 +29,7 @@ app.post('/ws_consultaSaldoCuenta', (req, res) => {
     consume_ws(req, res, '/efws/API/consultaSaldoCuenta');
 })
 
-module.exports = router;
+module.exports = app;
 
 
 // var log_file = fs.createWriteStream(__dirname + '/consola.log', {flags : 'w'});
