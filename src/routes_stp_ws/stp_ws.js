@@ -78,7 +78,8 @@ async function consume_ws(req, res, path) {
                 });
                 res.on('end', () => {
                     ie = 8;
-                    resolve(JSON.parse(responseBody));
+                    resolve("RESOLVI_TMP");
+                    //resolve(JSON.parse(responseBody));
                 });
             });
             req_prom.on('error', (err) => {
