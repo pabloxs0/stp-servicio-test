@@ -35,7 +35,7 @@ module.exports = router;
 async function consume_ws(req, res, path) {
     var ie = 0;
     try {
-        ie = 1;
+        ie = 1005;
         var cuerpo = req.body;
         ie = 1000;
         var json = JSON.stringify(req.body);
