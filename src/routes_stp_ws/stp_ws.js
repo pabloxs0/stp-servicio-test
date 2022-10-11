@@ -55,7 +55,7 @@ async function consume_ws(req, res, path) {
         var https = require('https');
         ie = 4;
         var options = {
-            hostname: 'prod.stpmex.com',
+            hostname: 'prod.stpmex.com:7002',
             path: path,
             method: 'POST',
             headers: {
