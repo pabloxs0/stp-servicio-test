@@ -53,7 +53,7 @@ async function consume_ws(req, res, path) {
         ie = 2;
         //var json = "dd";
 
-        var http = require('http');//, PORT = 7002;
+        var https = require('https');//, PORT = 7002;
         ie = 3;
         const options = {
             hostname: 'prod.stpmex.com',
@@ -66,7 +66,7 @@ async function consume_ws(req, res, path) {
         };
         ie = 4;
         let p = new Promise((resolve, reject) => {
-            const req_prom = http.request(options, (res) => {
+            const req_prom = https.request(options, (res) => {
                 res.setEncoding('utf8');
                 ie = 5;
                 let responseBody = '';
