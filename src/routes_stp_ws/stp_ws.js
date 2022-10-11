@@ -56,9 +56,10 @@ async function consume_ws(req, res, path) {
         ie = 4;
         var options = {
             hostname: 'prod.stpmex.com',
+            port: 7002,
             path: path,
             method: 'POST',
-            port: 7002,
+
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': json.length
@@ -66,33 +67,34 @@ async function consume_ws(req, res, path) {
         };
         ie = 5;
         let p = new Promise((resolve, reject) => {
-            const req = https.request(options, (res) => {
-                res.setEncoding('utf8');
-                let responseBody = '';
-                ie = 6;
-                res.on('data', (chunk) => {
-                    responseBody += chunk;
-                });
-                ie = 7;
-                res.on('end', () => {
-                    resolve(JSON.parse(responseBody));
-                });
-                ie = 8;
-                console.log("POST_RES", res.statusCode);
-                console.log("POST_RES", res.statusMessage);
-            });
-            ie = 9;
-            req.on('error', (err) => {
-               // reject(err);
-                res.json({"error_fatal": err.message});
-            });
-            ie = 10;
-            req.write(json)
-            ie = 11;
-            req.end();
+            // const req = https.request(options, (res) => {
+            //     res.setEncoding('utf8');
+            //     let responseBody = '';
+            //     ie = 6;
+            //     res.on('data', (chunk) => {
+            //         responseBody += chunk;
+            //     });
+            //     ie = 7;
+            //     res.on('end', () => {
+            //         resolve(JSON.parse(responseBody));
+            //     });
+            //     ie = 8;
+            //     console.log("POST_RES", res.statusCode);
+            //     console.log("POST_RES", res.statusMessage);
+            // });
+            // ie = 9;
+            // req.on('error', (err) => {
+            //    // reject(err);
+            //     res.json({"error_fatal": err.message});
+            // });
+            // ie = 10;
+            // req.write(json)
+            // ie = 11;
+            // req.end();
         });
         ie = 12;
-        let res = await p;
+        //let res = await p;
+        let res = "TEST I";
         ie = 13;
         res.json({"mensaje": res});
     } catch (e) {
