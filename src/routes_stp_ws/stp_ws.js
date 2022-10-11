@@ -93,8 +93,9 @@ async function consume_ws(req, res, path) {
             // req.end();
         });
         ie = 12;
-        //let res = await p;
-        let res = "TEST I";
+
+        let res = await p;
+
         ie = 13;
         res.json({"mensaje": res});
     } catch (e) {
