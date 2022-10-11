@@ -36,7 +36,7 @@ async function consume_ws(req_, res_, path) {
     var ie = 0;
 
 
-    var json = JSON.stringify(req.body);
+    var json = JSON.stringify(req_.body);
     // if (json == "{}") {
     //     res_.json({"error": "Cuerpo vacío '" + json + "'."});
     //     return
