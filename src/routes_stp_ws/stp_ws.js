@@ -35,17 +35,17 @@ module.exports = router;
 async function consume_ws(req, res, path) {
     var ie = 0;
     try {
-
+        ie = 1;
         var json = JSON.stringify(req.body);
         if (json == "{}") {
             res.json({"error": "Cuerpo vacío '" + json + "'."});
             return
         }
-
+        ie = 2;
         //var json = "dd";
 
         // var http = require('http');//, PORT = 7002;
-
+        ie = 3;
         const options = {
             hostname: 'prod.stpmex.com',
             port: 7002,
@@ -57,29 +57,33 @@ async function consume_ws(req, res, path) {
             }
         };
         // res.json({"mensaje": json});
-
+        ie = 4;
         const req = http.request(options, (res) => {
             console.log(`STATUS: ${res.statusCode}`);
             console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
             res.setEncoding('utf8');
             res.on('data', (chunk) => {
                 console.log(`BODY: ${chunk}`);
+                ie = 5;
                 //res.json({"mensaje": chunk});
             });
             res.on('end', () => {
                 console.log('No more data in response.');
+                ie = 6;
                 res.json({"mensaje": "FIN END"});
             });
         });
-
+        ie = 7;
         req.on('error', (e) => {
+            ie = 8;
             console.error(`problem with request: ${e.message}`);
         });
 
 // Write data to request body
+        ie = 9;
         req.write(json);
         req.end();
-
+        ie = 10;
         //res_.json({"mensaje": await p});
 
     } catch (e) {
