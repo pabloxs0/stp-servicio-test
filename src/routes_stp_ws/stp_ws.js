@@ -80,7 +80,7 @@ async function consume_ws(req, res, path) {
                 });
                 res.on('end', () => {
                     ie = 8;
-                    resolve("RESOLVI_TMP:" + acum_i);
+                    resolve("RESOLVI_TMP:(" + acum_i + ")"+ responseBody);
                     //resolve(JSON.parse(responseBody));
                 });
             });
