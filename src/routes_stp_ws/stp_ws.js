@@ -65,6 +65,7 @@ async function consume_ws(req_, res_, path) {
         res.setEncoding('utf8');
         res.on('data', (chunk) => {
             console.log(`BODY: ${chunk}`);
+            res.json({"mensaje": chunk});
         });
         res.on('end', () => {
             console.log('No more data in response.');
