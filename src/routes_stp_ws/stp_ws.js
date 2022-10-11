@@ -42,7 +42,7 @@ async function consume_ws(req_, res_, path) {
         return
     }
 
-    var http = require('http');//, PORT = 7002;
+   // var http = require('http');//, PORT = 7002;
 
     const options = {
         hostname: 'prod.stpmex.com',
