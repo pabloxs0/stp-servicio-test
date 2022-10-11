@@ -38,7 +38,7 @@ module.exports = router;
 
 async function consume_ws(req_, res_, path) {
     var ie = 0;
-    res_.json({"mensaje": "FIN"});
+
     return;
     var json = JSON.stringify(req.body);
     if (json == "{}") {
@@ -58,7 +58,7 @@ async function consume_ws(req_, res_, path) {
             'Content-Length': Buffer.byteLength(json)
         }
     };
-    res_.json({"mensaje": "FIN"});
+    res_.json({"mensaje": "FIN2"});
 
 //     const req = http.request(options, (res) => {
 //         console.log(`STATUS: ${res.statusCode}`);
