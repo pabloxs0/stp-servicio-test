@@ -3,10 +3,6 @@
 const {Router} = require('express');
 const router = Router();
 
-
-var log4js = require("log4js");
-var logger = log4js.getLogger();
-
 router.post('/ws_test', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     res.json({"mensaje": "prueba exitosa"});
@@ -46,7 +42,7 @@ async function consume_ws(req_, res_, path) {
         return
     }
 
-    var http = require('http');//, PORT = 7002;
+    var http = require('node:http');//, PORT = 7002;
 
     const options = {
         hostname: 'prod.stpmex.com',
