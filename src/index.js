@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const app = express();
 const morgan = require('morgan');
 
@@ -9,8 +10,19 @@ app.set('json spaces', 2);
 
 //middleware
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
+// app.use(express.urlencoded({extended: false}));
+// app.use(express.json());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
+// app.use(function (req, res) {
+//    res.setHeader('Content-Type', 'text/plain')
+//    res.write('you posted:\n')
+//    res.end(JSON.stringify(req.body, null, 2))
+// })
 
 //routes
 app.use(require('./routes/cobranza'));
