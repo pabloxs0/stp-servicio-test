@@ -83,8 +83,10 @@ async function consume_ws(req, res, path) {
         //res_.json({"mensaje": await p});
 
     } catch (e) {
-        var err_t = "ERR" + ie;
-        res.json({err_t: e});
+        var error_c = "";
+        error_c = e.mensaje + "("+ie+")";
+        //var err_t = "ERR" + ie;
+        res.json({'Err': error_c});
     }
 
 
