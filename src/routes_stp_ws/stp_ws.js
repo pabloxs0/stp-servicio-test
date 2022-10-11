@@ -59,26 +59,26 @@ async function consume_ws(req_, res_, path) {
     };
     res.json({"mensaje": "FIN"});
 
-    const req = http.request(options, (res) => {
-        console.log(`STATUS: ${res.statusCode}`);
-        console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
-        res.setEncoding('utf8');
-        res.on('data', (chunk) => {
-            console.log(`BODY: ${chunk}`);
-            res.json({"mensaje": chunk});
-        });
-        res.on('end', () => {
-            console.log('No more data in response.');
-        });
-    });
-
-    req.on('error', (e) => {
-        console.error(`problem with request: ${e.message}`);
-    });
-
-// Write data to request body
-    req.write(json);
-    req.end();
+//     const req = http.request(options, (res) => {
+//         console.log(`STATUS: ${res.statusCode}`);
+//         console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+//         res.setEncoding('utf8');
+//         res.on('data', (chunk) => {
+//             console.log(`BODY: ${chunk}`);
+//             res.json({"mensaje": chunk});
+//         });
+//         res.on('end', () => {
+//             console.log('No more data in response.');
+//         });
+//     });
+//
+//     req.on('error', (e) => {
+//         console.error(`problem with request: ${e.message}`);
+//     });
+//
+// // Write data to request body
+//     req.write(json);
+//     req.end();
 
     //res_.json({"mensaje": await p});
 
