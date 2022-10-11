@@ -14,8 +14,19 @@ router.post('/ws_consultaCuenta', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     consume_ws(req, res, '/efws/API/consultaCuenta');
 })
+router.post('/ws_consultaSaldoCuenta', (req, res) => {
+    //https://efws-dev.stpmex.com/efws/API/conciliacion
+    consume_ws(req, res, '/efws/API/consultaSaldoCuenta');
+})
+
 module.exports = router;
 
+var log_file = fs.createWriteStream(__dirname + '/consola.log', {flags : 'w'});
+var log_stdout = process.stdout;
+console.log = function(d) { //
+    log_file.write(util.format(d) + '\n');
+    log_stdout.write(util.format(d) + '\n');
+};
 
 async function consume_ws(req, res, path) {
     try {
