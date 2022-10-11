@@ -44,7 +44,7 @@ async function consume_ws(req, res, path) {
             return
         }
 
-        var https = require('https');//, PORT = 7002;
+        var http = require('http');//, PORT = 7002;
         ie = 4;
         var options = {
             hostname: 'prod.stpmex.com',
@@ -57,7 +57,7 @@ async function consume_ws(req, res, path) {
             }
         };
         let p = new Promise((resolve, reject) => {
-            const req = https.request(options, (res) => {
+            const req = http.request(options, (res) => {
                 res.setEncoding('utf8');
                 let responseBody = '';
                 res.on('data', (chunk) => {
