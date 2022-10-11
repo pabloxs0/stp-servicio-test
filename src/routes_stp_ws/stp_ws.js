@@ -37,10 +37,10 @@ async function consume_ws(req, res, path) {
     try {
 
         var json = JSON.stringify(req.body);
-        // if (json == "{}") {
-        //     res_.json({"error": "Cuerpo vacío '" + json + "'."});
-        //     return
-        // }
+        if (json == "{}") {
+            res_.json({"error": "Cuerpo vacío '" + json + "'."});
+            return
+        }
 
         //var json = "dd";
 
@@ -56,7 +56,7 @@ async function consume_ws(req, res, path) {
                 'Content-Length': Buffer.byteLength(json)
             }
         };
-        res.json({"mensaje": "FIN2"});
+        res.json({"mensaje": json});
 
 //     const req = http.request(options, (res) => {
 //         console.log(`STATUS: ${res.statusCode}`);
