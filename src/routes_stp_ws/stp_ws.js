@@ -67,30 +67,22 @@ async function consume_ws(req, res, path) {
         };
         ie = 5;
         let p = new Promise((resolve, reject) => {
-            // const req = https.request(options, (res) => {
-            //     res.setEncoding('utf8');
-            //     let responseBody = '';
-            //     ie = 6;
-            //     res.on('data', (chunk) => {
-            //         responseBody += chunk;
-            //     });
-            //     ie = 7;
-            //     res.on('end', () => {
-            //         resolve(JSON.parse(responseBody));
-            //     });
-            //     ie = 8;
-            //     console.log("POST_RES", res.statusCode);
-            //     console.log("POST_RES", res.statusMessage);
-            // });
-            // ie = 9;
-            // req.on('error', (err) => {
-            //    // reject(err);
-            //     res.json({"error_fatal": err.message});
-            // });
-            // ie = 10;
-            // req.write(json)
-            // ie = 11;
-            // req.end();
+            const req = https.request(options, (res) => {
+                res.setEncoding('utf8');
+                let responseBody = '';
+                res.on('data', (chunk) => {
+                    responseBody += chunk;
+                });
+                res.on('end', () => {
+                    resolve(JSON.parse(responseBody));
+                });
+            });
+            req.on('error', (err) => {
+               // reject(err);
+                res.json({"error_fatal": err.message});
+            });
+            req.write(json)
+            req.end();
         });
         ie = 12;
 
