@@ -87,7 +87,7 @@ async function consume_ws(req, res, path) {
                 });
             });
             req_prom.on('error', (err) => {
-                ie = 9;
+                ie = err;
                 reject(err);
                 //res.json({"error_fatal": err.message});
                 // return;
