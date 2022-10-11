@@ -39,18 +39,11 @@ module.exports = router;
 async function consume_ws(req, res, path) {
     var ie = 0;
     try {
-        console.log("JSON_PRE_VACIO", req.body);
-        ie = 1;
-        logger.level = "debug";
-        logger.debug("Some debug messages");
-        ie = 2;
         var json = JSON.stringify(req.body);
         if (json == "{}") {
             res.json({"error": "Cuerpo vacío '" + json + "'."});
             return
         }
-        ie = 3;
-        //log("JSON_NO_VACIO", json);
 
         var https = require('https');//, PORT = 7002;
         ie = 4;
@@ -59,14 +52,12 @@ async function consume_ws(req, res, path) {
             port: 7002,
             path: path,
             method: 'POST',
-
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': json.length
             }
         };
-        ie = 5;
-        let p = new Promise((resolve, reject) => {
+         let p = new Promise((resolve, reject) => {
             const req = https.request(options, (res) => {
                 res.setEncoding('utf8');
                 let responseBody = '';
@@ -84,12 +75,8 @@ async function consume_ws(req, res, path) {
             req.write(json)
             req.end();
         });
-        ie = 12;
-
-        let res = await p;
-
-        ie = 13;
-        res.json({"mensaje": res});
+         let res = await p;
+      res.json({"mensaje": res});
     } catch (e) {
         res.json({"error": e + "["+ie+"]"});
     }
