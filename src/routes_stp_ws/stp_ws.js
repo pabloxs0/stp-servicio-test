@@ -58,7 +58,7 @@ async function consume_ws(req, res, path) {
             hostname: 'prod.stpmex.com',
             path: path,
             method: 'POST',
-            port: '7002',
+            port: 7002,
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': json.length
