@@ -59,7 +59,7 @@ async function consume_ws(req, res, path) {
         //var json = "dd";
 
         var http = require('http');//, PORT = 7002;
-        ie = 3;
+        ie = Buffer.byteLength(json);
         const options = {
             hostname: 'prod.stpmex.com',
             port: 7002,
