@@ -3,6 +3,11 @@
 const {Router} = require('express');
 const router = Router();
 
+
+var log4js = require("log4js");
+var logger = log4js.getLogger();
+
+
 router.post('/ws_test', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     res.json({"mensaje": "prueba exitosa"});
@@ -36,15 +41,18 @@ async function consume_ws(req, res, path) {
     try {
         console.log("JSON_PRE_VACIO", req.body);
 
+        logger.level = "debug";
+        logger.debug("Some debug messages");
+
         var json = JSON.stringify(req.body);
         if (json == "{}") {
             res.json({"error": "Cuerpo vacío '" + json + "'."});
             return
         }
 
-        console.log("JSON_NO_VACIO", json);
+        log("JSON_NO_VACIO", json);
 
-        var http = require('http');
+        var https = require('https');
 
         var options = {
             hostname: 'prod.stpmex.com',
@@ -57,7 +65,7 @@ async function consume_ws(req, res, path) {
         };
 
         let p = new Promise((resolve, reject) => {
-            const req = http.request(options, (res) => {
+            const req = https.request(options, (res) => {
                 res.setEncoding('utf8');
                 let responseBody = '';
 
@@ -80,9 +88,9 @@ async function consume_ws(req, res, path) {
             req.end();
         });
 
-        // return await p;
+        let res = await p;
 
-        res.json({"mensaje": await p});
+        res.json({"mensaje": res});
     } catch (e) {
         res.json({"error": e});
     }
