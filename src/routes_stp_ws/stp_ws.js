@@ -1,22 +1,30 @@
-// const fs = require('fs');
-// const util = require('util');
-const {Router} = require('express');
-const router = Router();
 
-router.post('/ws_test', (req, res) => {
+// const {Router} = require('express');
+// var bodyParser = require('body-parser')
+// const router = Router();
+
+var express = require('express')
+var bodyParser = require('body-parser')
+var app = express()
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
+app.post('/ws_test', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     res.json({"mensaje": "prueba exitosa"});
 })
 
-router.post('/ws_conciliacion', (req, res) => {
+app.post('/ws_conciliacion', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     consume_ws(req, res, '/efws/API/conciliacion');
 })
-router.post('/ws_consultaCuenta', (req, res) => {
+app.post('/ws_consultaCuenta', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     consume_ws(req, res, '/efws/API/consultaCuenta');
 })
-router.post('/ws_consultaSaldoCuenta', (req, res) => {
+app.post('/ws_consultaSaldoCuenta', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     consume_ws(req, res, '/efws/API/consultaSaldoCuenta');
 })
@@ -35,7 +43,9 @@ module.exports = router;
 async function consume_ws(req, res, path) {
     var ie = 0;
     try {
-        ie = req;
+        console.log(req.body);
+        //console.log(`Server on port ${7025}`);//backtick (alt+96)
+        ie = 1;
         var cuerpo = req.body;
         ie = 1000;
         var json = JSON.stringify(req.body);
