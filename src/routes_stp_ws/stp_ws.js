@@ -83,7 +83,7 @@ async function consume_ws(req_, res_, path) {
     //res_.json({"mensaje": await p});
 
 
-    //   res.json({"mensaje": postreq.body});
+    res.json({"mensaje": "FIN"});
 }
 
 
