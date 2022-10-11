@@ -21,6 +21,8 @@ router.post('/ws_consultaSaldoCuenta', (req, res) => {
 
 module.exports = router;
 
+var fs = require('fs');
+var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/consola.log', {flags : 'w'});
 var log_stdout = process.stdout;
 console.log = function(d) { //
