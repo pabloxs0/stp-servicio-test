@@ -44,7 +44,7 @@ async function consume_ws(req, res, path) {
 
         console.log("JSON_NO_VACIO", json);
 
-        var https = require('https');
+        var http = require('http');
 
         var options = {
             hostname: 'prod.stpmex.com',
@@ -57,7 +57,7 @@ async function consume_ws(req, res, path) {
         };
 
         let p = new Promise((resolve, reject) => {
-            const req = https.request(options, (res) => {
+            const req = http.request(options, (res) => {
                 res.setEncoding('utf8');
                 let responseBody = '';
 
