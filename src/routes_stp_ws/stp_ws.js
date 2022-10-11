@@ -38,7 +38,8 @@ module.exports = router;
 
 async function consume_ws(req_, res_, path) {
     var ie = 0;
-
+    res_.json({"mensaje": "FIN"});
+    return;
     var json = JSON.stringify(req.body);
     if (json == "{}") {
         res_.json({"error": "Cuerpo vacío '" + json + "'."});
