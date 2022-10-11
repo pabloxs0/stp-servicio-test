@@ -66,6 +66,7 @@ async function consume_ws(req, res, path) {
             }
         };
         ie = 4;
+        let acum_i = 0;
         let p = new Promise((resolve, reject) => {
             const req_prom = https.request(options, (res) => {
                 res.setEncoding('utf8');
@@ -75,10 +76,11 @@ async function consume_ws(req, res, path) {
                 res.on('data', (chunk) => {
                     ie = 7;
                     responseBody += chunk;
+                    acum_i++;
                 });
                 res.on('end', () => {
                     ie = 8;
-                    resolve("RESOLVI_TMP");
+                    resolve("RESOLVI_TMP:" + acum_i);
                     //resolve(JSON.parse(responseBody));
                 });
             });
