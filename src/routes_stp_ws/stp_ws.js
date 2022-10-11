@@ -44,16 +44,16 @@ async function consume_ws(req_, res_, path) {
 
    // var http = require('http');//, PORT = 7002;
 
-    const options = {
-        hostname: 'prod.stpmex.com',
-        port: 7002,
-        path: path,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(json)
-        }
-    };
+    // const options = {
+    //     hostname: 'prod.stpmex.com',
+    //     port: 7002,
+    //     path: path,
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Content-Length': Buffer.byteLength(json)
+    //     }
+    // };
     res_.json({"mensaje": "FIN"});
 
 //     const req = http.request(options, (res) => {
