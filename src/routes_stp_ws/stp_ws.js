@@ -1,5 +1,3 @@
-// const fs = require('fs');
-// const util = require('util');
 const {Router} = require('express');
 const router = Router();
 
@@ -13,8 +11,6 @@ router.post('/ws_test', (req, res) => {
 })
 
 router.post('/ws_conciliacion', (req, res) => {
-    console.log("ANTES---------------");
-    console.log(req.body);
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     consume_ws(req, res, '/efws/API/conciliacion');
 })
@@ -29,32 +25,15 @@ router.post('/ws_consultaSaldoCuenta', (req, res) => {
 
 module.exports = router;
 
-
-// var log_file = fs.createWriteStream(__dirname + '/consola.log', {flags : 'w'});
-// var log_stdout = process.stdout;
-//
-// console.log = function(d) { //
-//     log_file.write(util.format(d) + '\n');
-//     log_stdout.write(util.format(d) + '\n');
-// };
-
 async function consume_ws(req, res, path) {
-    var ie = 0;
     try {
-        ie = 1000;
         var json = JSON.stringify(req.body);
-        ie = 19;
         if (json == "{}") {
-            ie = 21;
             res.json({"error": "Cuerpo vacío '" + json + "'."});
-            ie = 22;
             return
         }
-        ie = 2;
-        //var json = "dd";
 
         var https = require('https');//, PORT = 7002;
-        ie = 3;
         const options = {
             hostname: 'prod.stpmex.com',
             port: 7002,
@@ -65,51 +44,30 @@ async function consume_ws(req, res, path) {
                 'Content-Length': Buffer.byteLength(json)
             }
         };
-        ie = 4;
-        let acum_i = 0;
         let p = new Promise((resolve, reject) => {
             const req_prom = https.request(options, (res) => {
                 res.setEncoding('utf8');
-                ie = 5;
                 let responseBody = '';
-                ie = 6;
                 res.on('data', (chunk) => {
-                    ie = 7;
                     responseBody += chunk;
-                    acum_i++;
                 });
                 res.on('end', () => {
-                    ie = 8;
-                    resolve("RESOLVI_TMP:(" + acum_i + ")"+ responseBody);
-                    //resolve(JSON.parse(responseBody));
+                    resolve(responseBody);
                 });
             });
             req_prom.on('error', (err) => {
-                //ie = err;
                 res.json({"error_fatal": err.message + "["+err.code+"]"});
                 reject(err);
-
-                // return;
             });
-            ie = 10;
             req_prom.write(json)
-            ie = 11;
             req_prom.end();
-            ie = 12;
         });
 
-        ie = 13;
         res.json({"mensaje": await p});
 
     } catch (e) {
         console.log(e);
-        var error_c = "";
-        error_c = e + "("+ie+")";
-        //var err_t = "ERR" + ie;
-        res.json({'Err': error_c});
-
-    } finally {
-        res.json({'FNLY': error_c});
+        res.json({'Err': e});
     }
 
 
