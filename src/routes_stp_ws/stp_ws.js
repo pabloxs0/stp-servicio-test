@@ -3,7 +3,7 @@ const router = Router();
 
 router.post('/ws_test', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
-    res.json({"mensaje": "prueba exitosa"});
+    res.json({"mensaje": "[{\"idEF\":323297083,\"claveRastreo\":\"BNET01002210070039492186\""});
 })
 
 router.post('/ws_conciliacion', (req, res) => {
