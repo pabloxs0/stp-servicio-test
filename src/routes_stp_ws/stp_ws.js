@@ -61,7 +61,7 @@ async function consume_ws(req, res, path) {
             req_prom.end();
         });
 
-        res.json(await p);
+        res.send(await p);
 
     } catch (e) {
         console.log(e);
