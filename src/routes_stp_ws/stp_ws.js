@@ -1,10 +1,6 @@
 const {Router} = require('express');
 const router = Router();
 
-const bodyParser = require('body-parser')
-var jsonParser = bodyParser.json()
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
 router.post('/ws_test', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     res.json({"mensaje": "prueba exitosa"});
@@ -63,7 +59,7 @@ async function consume_ws(req, res, path) {
             req_prom.end();
         });
 
-        res.json({"mensaje": await p});
+        res.json(await p);
 
     } catch (e) {
         console.log(e);
