@@ -36,7 +36,7 @@ async function consume_ws(req, res, path) {
             path: path,
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain',
                 'Content-Length': Buffer.byteLength(json)
             }
         };
