@@ -5,7 +5,7 @@ router.post('/ws_test', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
 //    let responseBody = JSON.parse(this.err._body);
     let json_test = "{\"mensaje\": \"[{\"idEF\":323297083,\"claveRastreo\":\"BNET01002210070039492186\"\"}"
-    res.json(json_test);
+    res.send(json_test);
 })
 
 router.post('/ws_conciliacion', (req, res) => {
