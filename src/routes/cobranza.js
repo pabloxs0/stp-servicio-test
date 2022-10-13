@@ -25,7 +25,7 @@ router.post('/cobranza', (req, res) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': json.length
+            'Content-Length': Buffer.byteLength(json)
         }
     };
     var postreq = https.request(options, function (res) {
