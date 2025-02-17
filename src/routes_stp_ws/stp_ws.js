@@ -21,7 +21,7 @@ router.post('/ws_consultaSaldoCuenta', (req, res) => {
     consume_ws(req, res, '/efws/API/consultaSaldoCuenta');
 })
 router.post('/ws_consultaOperaciones', (req, res) => {
-    //https://efws-dev.stpmex.com/efws/API/conciliacion
+    //https://efws-dev.stpmex.com/consultasws/API/operaciones/historica
     consume_ws(req, res, '/consultasws/API/operaciones/historica');
 })
 module.exports = router;
@@ -45,7 +45,6 @@ async function consume_ws(req, res, path) {
 
         const options = {
             hostname: hostN,
-            port: 7002,
             path: path,
             method: 'POST',
             headers: {
