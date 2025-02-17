@@ -3,6 +3,21 @@
  https://www.youtube.com/watch?v=bK3AJfs7qNY
  https://www.youtube.com/watch?v=B7aYEoclllA&t=1394s
 
+//////////>>>LINEAS PARA CREAR CER KEY
+
+-------PRODUCCION
+keytool -genkey -alias GAS_DIAMANTE2 -keyalg RSA -keystore GAS_DIAMANTE2_LLPRIV.jks -keysize 2048 -deststoretype jks -validity 730
+pwd: gasdiamante99
+keytool -importkeystore -srckeystore GAS_DIAMANTE2_LLPRIV.jks -destkeystore GAS_DIAMANTE2_LLPRIV12.p12 -srcstoretype jks -deststoretype pkcs12 -validity 730
+keytool -export -alias GAS_DIAMANTE2 -keystore GAS_DIAMANTE2_LLPRIV.jks -rfc -file GAS_DIAMANTE2_LLPUBLIC.cer -validity 730
+
+-------PRUEBAS
+keytool -genkey -alias GAS_DIAMANTE2 -keyalg RSA -keystore GAS_DIAMANTE2_LLPRIV_TEST.jks -keysize 2048 -deststoretype jks -validity 730
+pwd: gasdiamante88
+keytool -importkeystore -srckeystore GAS_DIAMANTE2_LLPRIV_TEST.jks -destkeystore GAS_DIAMANTE2_LLPRIV12_TEST.p12 -srcstoretype jks -deststoretype pkcs12 -validity 730
+keytool -export -alias GAS_DIAMANTE2 -keystore GAS_DIAMANTE2_LLPRIV_TEST.jks -rfc -file GAS_DIAMANTE2_LLPUBLIC_TEST.cer -validity 730
+
+
  //////////////>>>>>>PASOS PARA ECHAR A ANDAR UN SERVIDOR.sss
 
  sudo apt update
@@ -16,8 +31,11 @@
  sudo ufw allow 'NGINX Full' AGREGAMOS PUERTOS AL FW
 
  sudo ufw allow 7025 >>>> AGREGAMOS EL PUERTO QUE VAMOS A USAR!!!!
+ sudo ufw allow 22 >>>> AGREGAMOS EL PUERTO QUE VAMOS A USAR!!!!
 
- curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+  sudo ufw allow 22 >>>> AGREGAMOS EL PUERTO QUE VAMOS A USAR!!!!
+
+ curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
  sudo apt install nodejs
 
  sudo apt install git
@@ -53,5 +71,15 @@ pm2 restart index
 
 //Files woud be overwritten by merge:
 git reset --hard
+
+
+El servidor que estará conectado con nosotros a través del túnel debe ser mapeado del dominio prod.stpmex.com a la ip 10.5.1.1 para poder consumir nuestros servicios.
+
+Nosotros estamos conectados a la ip 10.5.1.1, tengo que hacer algún cambio para apuntar prod.stpmex.com?
+
+
+R-----> Para poder consumir nuestros servicios productivos es necesario que se realice el mapeo del dominio prod.stpmex.com a la ip 10.5.1.1  en su archivo host, esto con la finalidad de forzar que la conexión se vaya por la VPN.
+
+
 
 
