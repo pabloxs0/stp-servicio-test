@@ -20,8 +20,13 @@ router.post('/ws_consultaSaldoCuenta', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     consume_ws(req, res, '/efws/API/consultaSaldoCuenta');
 })
-
+router.post('/ws_consultaOperaciones', (req, res) => {
+    //https://efws-dev.stpmex.com/efws/API/conciliacion
+    consume_ws(req, res, '/consultasws/API/operaciones/historica');
+})
 module.exports = router;
+
+const PRUEBAS = true;
 
 async function consume_ws(req, res, path) {
     try {
@@ -31,9 +36,15 @@ async function consume_ws(req, res, path) {
             return
         }
 
-        var https = require('https');//, PORT = 7002;
+        var https = require('https');
+
+        var hostN = "prod.stpmex.com";
+        if (PRUEBAS) {
+            hostN = "efws-dev.stpmex.com"
+        }
+
         const options = {
-            hostname: 'prod.stpmex.com',
+            hostname: hostN,
             port: 7002,
             path: path,
             method: 'POST',
