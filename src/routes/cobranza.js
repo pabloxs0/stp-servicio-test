@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 
-const PRUEBAS = false;
+const PRUEBAS = true;
 
 router.post('/cobranza', (req, res) => {
 
@@ -21,7 +21,7 @@ router.post('/cobranza', (req, res) => {
 
     var options = {
         hostname: url_,
-        path: '/stp/cobranza/TKN_ACJP_SINUBE_2022',
+        path: '/stp/cobranza/TKN_ACJP_SINUBE_2022/' + PRUEBAS?'FN':'SN',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

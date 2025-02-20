@@ -15,22 +15,15 @@ router.post('/ws_conciliacion', (req, res) => {
 router.post('/ws_consultaCuenta', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/conciliacion
     consume_ws(req, res, '/efws/API/consultaCuenta');
-
-})
-router.post('/ws_consultaSaldoCuenta', (req, res) => {
-    //https://efws-dev.stpmex.com/efws/API/conciliacion
-    consume_ws(req, res, '/efws/API/consultaSaldoCuenta');
-
-})
-router.post('/ws_consultaOperaciones', (req, res) => {
-    //https://efws-dev.stpmex.com/consultasws/API/operaciones/historica
-    consume_ws(req, res, '/consultasws/API/operaciones/historica');
 })
 router.post('/ws_consultaSaldoCuenta', (req, res) => {
     //https://efws-dev.stpmex.com/efws/API/consultaSaldoCuenta
     consume_ws(req, res, '/efws/API/consultaSaldoCuenta');
 })
-
+router.post('/ws_consultaOperaciones', (req, res) => {
+    //https://efws-dev.stpmex.com/consultasws/API/operaciones/historica
+    consume_ws(req, res, '/consultasws/API/operaciones/historica');
+})
 module.exports = router;
 
 const PRUEBAS = true;
