@@ -19,9 +19,10 @@ router.post('/cobranza', (req, res) => {
         url_ = 'ep-dot-facturanube.appspot.com';
     }
 
+    var path = '/stp/cobranza/TKN_ACJP_SINUBE_2022/' + (PRUEBAS?'FN':'SN');
     var options = {
         hostname: url_,
-        path: '/stp/cobranza/TKN_ACJP_SINUBE_2022/' + PRUEBAS?'FN':'SN',
+        path: path,
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
