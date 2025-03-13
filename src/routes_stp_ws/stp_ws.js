@@ -26,7 +26,7 @@ router.post('/ws_consultaOperaciones', (req, res) => {
 })
 module.exports = router;
 
-const PRUEBAS = true;
+const PRUEBAS = false;//PRUEBAS NO LLEVAN PUERTO (lin 49)
 
 async function consume_ws(req, res, path) {
     try {
@@ -46,6 +46,7 @@ async function consume_ws(req, res, path) {
         const options = {
             hostname: hostN,
             path: path,
+            port: 7002,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
