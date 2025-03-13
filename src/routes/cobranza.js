@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 
-const PRUEBAS = true;
+const PRUEBAS = false;
 
 router.post('/cobranza', (req, res) => {
 
